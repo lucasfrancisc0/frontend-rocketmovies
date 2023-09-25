@@ -1,6 +1,8 @@
 import { Container, Avatar } from './styles';
 import { FiSearch } from 'react-icons/fi'
 
+import avatarPlaceholder from '../../assets/avatar_placeholder.svg';
+
 import { Input } from '../Input';
 
 
@@ -19,15 +21,20 @@ export function Header() {
         type='text'
         autoComplete='text'
         placeholder="Pesquisar pelo título"
+        className="InputSearch"
       />
 
+
       <Avatar>
-        <h3>Lucas Gonçalves</h3>
-        <span>Sair</span>
 
         <div>
-          <img src="" alt="" />
+          <h3>Lucas Gonçalves</h3>
+          <span>Sair</span>
         </div>
+
+        <img src={avatarPlaceholder} alt="" />
+
+
       </Avatar>
 
     </Container>

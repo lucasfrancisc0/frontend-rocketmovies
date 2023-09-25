@@ -1,10 +1,10 @@
 import { Container } from './styles';
 
 
-export function Input({ icon: Icon, autoComplete="text", type="text", ...rest }) {
+export function Input({ icon: Icon, autoComplete="text", type="text", className,...rest }) {
   return (
 
-    <Container >
+    <Container className={className}>
 
       {
         Icon && <Icon />
