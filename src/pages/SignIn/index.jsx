@@ -41,13 +41,11 @@ export function SignIn() {
 
 
         <div className="ButtonCreate">
-
-        <ButtonText 
-          title="Criar conta"
-          $IsActive 
-        />
-
+          <ButtonText 
+            title="Criar conta"
+          />
         </div>
+        
 
       </main>
 

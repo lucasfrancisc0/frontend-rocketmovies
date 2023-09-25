@@ -1,17 +1,22 @@
 import { Container } from './styles';
+import { FiArrowLeft } from 'react-icons/fi';
 
+export function ButtonText({ title, ...rest }) {
 
-export function ButtonText({ isActive: $IsActive, title, ...rest }) {
+  const arrow = rest['data-arrow'];
 
   return(
 
-    <Container 
-      type='button' 
-      $IsActive={$IsActive}
-      {...rest}
-    >
+    <Container data-arrow={arrow}>
+
+      {
+        arrow && <FiArrowLeft />
+      }
+
+      <button {...rest}>
+        {title}
+      </button>
       
-      {title}
 
     </Container>
 

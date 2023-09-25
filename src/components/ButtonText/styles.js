@@ -1,11 +1,26 @@
 import styled from 'styled-components';
 
 
-export const Container = styled.button`
-  width: max-content;
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
 
-  background: none;
-  border: none;
+  cursor: pointer;
+  gap: .8rem;
 
-  color: ${({ theme, $IsActive }) => $IsActive ? theme.COLORS.PINK_ISHRED : theme.COLORS.GRAY_200};
+  > button { 
+    width: max-content;
+
+    background: none;
+    border: none;
+
+    color: ${({ theme }) => theme.COLORS.PINK_ISHRED};
+  };
+
+  > svg {
+    width: 1.6rem;
+    height: 1.6rem;
+
+    color: ${({ theme }) => theme.COLORS.PINK_ISHRED};
+  };
 `;
