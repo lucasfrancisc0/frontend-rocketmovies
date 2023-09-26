@@ -5,25 +5,27 @@ import starEmpty from '../../assets/star-empty.svg';
 
  
 export function Stars({ value = 0 }) {
+  
 
-
-  function verifyStars(value) {
+  function structuredStars(value) {
     let countStars = [];
 
     for(let i = 0; i < 5; i++) {
 
-      if(i < value) {
-        countStars = [...countStars, {url: starFull}];
-
-      }else {
-        countStars = [...countStars, {url: starEmpty}];
+      const star = {
+        url: i < value ? starFull : starEmpty
       };
+
+      countStars = [...countStars, star]
     };
 
-    return countStars
+    
+    return countStars;
   };
 
-  const verifiedStars = verifyStars(value);
+  
+  const verifiedStars = structuredStars(value);
+
 
   return(
 

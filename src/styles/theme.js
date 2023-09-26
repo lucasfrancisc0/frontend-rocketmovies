@@ -13,8 +13,10 @@ export default {
     GRAY_200: "#948F99",
     GRAY_300: "#3E3B47",
 
-    WHITE: "#F4EDE8",
     WHITE_TAG: "#E5E5E5",
+    BACKGROUND_TAG: "#282124",
+
+    WHITE: "#F4EDE8",
     WHITE_SUBTITLE: "#CAC4CF"
   }
 };
