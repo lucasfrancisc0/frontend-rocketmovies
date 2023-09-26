@@ -12,9 +12,11 @@ export function Header() {
 
     <Container>
 
+
       <h2>
         RocketMovies
       </h2>
+
 
       <Input
         icon={FiSearch} 
@@ -34,10 +36,8 @@ export function Header() {
 
         <img src={avatarPlaceholder} alt="" />
 
-
       </Avatar>
 
     </Container>
-
   );
 };

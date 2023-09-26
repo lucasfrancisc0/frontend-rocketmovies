@@ -23,4 +23,8 @@ export const Container = styled.div`
 
     color: ${({ theme }) => theme.COLORS.PINK_ISHRED};
   };
+
+  :hover {
+    filter: brightness(0.8);
+  }
 `;
