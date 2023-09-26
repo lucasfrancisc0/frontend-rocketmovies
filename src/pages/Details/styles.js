@@ -7,27 +7,54 @@ export const Container = styled.div`
 
   display: grid;
   grid-template-rows: 11.6rem auto;
+  grid-template-columns: minmax(75rem, auto);
 
   grid-template-areas: 
     "header"
     "content"
   ;
 
-  > main {
+  > section {
+    width: 100%;
+    height: 100%;
+
     grid-area: content;
-  }
+    overflow-y: auto;
+
+    main {
+      max-width: 111.3rem;
+      
+      padding: 4rem 2rem ;
+      margin: auto;
+
+      p {
+        text-align: justify;
+      };
+    };
+  };
+
+
+  > section::-webkit-scrollbar-thumb {
+    border-radius: .8rem; 
+
+    background-color: ${({ theme }) => theme.COLORS.PINK_ISHRED}; 
+  };
+
+  > section::-webkit-scrollbar {
+    width: .8rem;
+    background: transparent;
+  };
 `;
 
 
 export const Title = styled.div`
-  margin: 2.4rem 0;
-
   display: flex;
   align-items: center;
 
+  margin: 2.4rem 0;
   gap: 1.9rem;
+`;
 
-`
 
 export const Creation = styled.div`
   display: flex;
@@ -47,14 +74,12 @@ export const Creation = styled.div`
     width: 2rem;
     height: 2rem;
   };
-
-  > span {
-
-  }
 `;
 
 
 export const BookMarks = styled.div`
   display: flex;
   gap: .8rem;
+
+  margin-bottom: 4rem;
 `;
