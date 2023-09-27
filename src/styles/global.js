@@ -37,4 +37,8 @@ export default createGlobalStyle`
     cursor: pointer;
     transition: filter 0.2s;
   };
+
+  button:hover {
+    filter: brightness(.9);
+  }
 `;
