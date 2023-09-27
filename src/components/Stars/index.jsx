@@ -4,8 +4,8 @@ import starFull from '../../assets/star-full.svg';
 import starEmpty from '../../assets/star-empty.svg';
 
  
-export function Stars({ value = 0 }) {
-  
+export function Stars({ value = 0, ...rest }) {
+
 
   function structuredStars(value) {
     let countStars = [];
@@ -34,9 +34,17 @@ export function Stars({ value = 0 }) {
       {
         verifiedStars.map((item, index) => {
           return (
-            <li key={`star_${index}`}>
 
-              <img src={item.url} />
+            <li 
+              key={`star_${index}`}
+              {...rest}
+            >
+
+              <img
+                data-value={index + 1} 
+                src={item.url}
+              />
+
             </li>
           );
         })
