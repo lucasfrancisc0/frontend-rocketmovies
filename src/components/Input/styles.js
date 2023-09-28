@@ -27,6 +27,7 @@ export const Container = styled.div`
 
 
   > svg {
+    min-width: 2rem;
     width: 2rem;
     height: 1.8rem;
 

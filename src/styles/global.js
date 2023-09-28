@@ -21,7 +21,7 @@ export default createGlobalStyle`
   };
 
 
-  body, button, input, text-area {
+  body, button, input, textarea {
     font-family: Roboto Slab;
     font-weight: 400;
     font-size: 1.6rem;

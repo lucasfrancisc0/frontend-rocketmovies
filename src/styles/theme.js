@@ -9,7 +9,8 @@ export default {
     BLACK: "#0D0C0F",
     
     PINK_ISHRED: "#FF859B",
-    
+
+    GRAY_100: "#999591",
     GRAY_200: "#948F99",
     GRAY_300: "#3E3B47",
 
@@ -17,6 +18,8 @@ export default {
     BACKGROUND_TAG: "#282124",
 
     WHITE: "#F4EDE8",
-    WHITE_SUBTITLE: "#CAC4CF"
+    WHITE_SUBTITLE: "#CAC4CF",
+
+    RED: "#FF002E"
   }
 };

@@ -7,6 +7,6 @@ export const Container = styled.div`
   border-radius: 1rem;
   padding: .8rem 1.6rem;
 
-  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_TAG};
+  background-color: ${({ theme, 'data-inmovie': inmovie }) => inmovie ? theme.COLORS.BACKGROUND_700 : theme.COLORS.BACKGROUND_TAG};
   color: ${({ theme }) => theme.COLORS.WHITE_TAG};
 `;

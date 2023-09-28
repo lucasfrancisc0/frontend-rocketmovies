@@ -14,25 +14,51 @@ export const Container = styled.div`
     "content"
   ;
 
+  .Content::-webkit-scrollbar-thumb {
+    border-radius: .8rem; 
+
+    background-color: ${({ theme }) => theme.COLORS.PINK_ISHRED}; 
+  };
+
+  .Content::-webkit-scrollbar {
+    width: .8rem;
+    background: transparent;
+  };
+`;
+
+
+export const Content = styled.div`
+  grid-area: content;
+  
+  overflow-y: scroll;
 
   > main {
+    max-width: 111.3rem;
+
+
+    margin: auto;
     padding: 4rem 2rem;
-    grid-area: content;
+
+    section h2 {
+      margin: 4rem 0 2.4rem;
+
+      font-size: 2rem;
+      color: ${({ theme }) => theme.COLORS.GRAY_100};
+    };
+  };
+`
 
 
-    h1 {
+export const Form = styled.form`
+  
+
+  h1 {
       font-size: 3.6rem;
       font-weight: 500;
 
       margin-top: 2.4rem;
       margin-bottom: 4rem;
     };
-  };
-`;
-
-
-export const Form = styled.form`
-  width: 111.3rem;
 
 
   .RatingTitle {
@@ -40,6 +66,13 @@ export const Form = styled.form`
     align-items: center;
 
     gap: 4rem;
+  };
+
+
+  > textarea {
+    height: 27.4rem;
+
+    margin-top: 4rem;
   };
 `;
 
@@ -55,8 +88,39 @@ export const Rating = styled.div`
     cursor: pointer;
   };
 
+
   img:hover {
     transition: .6s;
     filter: brightness(.7)
   };
+`;
+
+
+export const BookMarks = styled.ul`
+
+  display: flex;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  list-style: none;
+
+  background: ${({ theme }) => theme.COLORS.BLACK};
+  border-radius: 1rem;
+
+  padding: 1.6rem;
+  gap: 2.4rem;
+`;
+
+
+export const Buttons = styled.div`
+  display: flex;
+  
+  gap: 4rem;
+  padding-top: 4rem;
+
+  .ButtonDelete {
+    background: ${({ theme }) => theme.COLORS.BLACK};
+    color: ${({ theme }) => theme.COLORS.PINK_ISHRED};
+  }
 `;

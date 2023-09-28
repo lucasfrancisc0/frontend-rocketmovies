@@ -1,11 +1,16 @@
 import { Container } from './styles';
 
 
-export function Tag({ title }) {
+export function Tag({ title, ...rest }) {
+
+  const inmovie = rest['data-inmovie']
 
   return(
 
-    <Container title={title}>
+    <Container 
+      title={title}
+      data-inmovie={inmovie}  
+    >
 
       { title }
 
