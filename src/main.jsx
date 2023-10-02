@@ -7,7 +7,7 @@ import GlobalStyles from './styles/global';
 
 import { Routes } from './routes';
 
-import { Home } from './pages/Home';
+import { authProvider } from './hooks/auth';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -16,7 +16,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider theme={theme} >
       <GlobalStyles />
 
-      <Routes />
+
+      <authProvider>
+        <Routes />
+      </authProvider>
+      
 
     </ThemeProvider>
 
