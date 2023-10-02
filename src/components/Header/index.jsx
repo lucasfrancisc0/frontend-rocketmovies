@@ -1,12 +1,20 @@
 import { Container, Avatar } from './styles';
-import { FiSearch } from 'react-icons/fi'
 
+import { FiSearch } from 'react-icons/fi'
 import avatarPlaceholder from '../../assets/avatar_placeholder.svg';
 
 import { Input } from '../Input';
 
+import { useState } from 'react';
+import { useAuth } from '../../hooks/auth';
+import { api } from '../../services/api';
+
 
 export function Header() {
+  const { user } = useAuth()
+
+  const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${ user.avatar }` : avatarPlaceholder;
+
 
   return (
 
@@ -34,7 +42,7 @@ export function Header() {
           <span>Sair</span>
         </div>
 
-        <img src={avatarPlaceholder} alt="" />
+        <img src={avatarURL} alt="" />
 
       </Avatar>
 

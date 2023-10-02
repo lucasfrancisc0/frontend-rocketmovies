@@ -35,7 +35,46 @@ function AuthProvider({ children }) {
   };
 
 
-  useEffect(() => {
+  async function updateProfile(user, avatarFile) {
+
+    try {
+
+      if(avatarFile) {
+        const fileUploadForm = new FormData();
+        fileUploadForm.append("avatar", avatarFile);
+
+        const response = await api.patch("users/avatar", fileUploadForm);
+        user.avatar = response.data.avatar;
+      };
+
+      const { name, email, password, old_password } = user;
+
+      const res = await api.put("/users", { name, email, password, old_password });
+
+      localStorage.setItem("@rocketmovies:user", JSON.stringify(user));
+
+      setData({
+        user,
+        token: data.token  
+      });
+
+      alert(res.data.message);
+
+    }catch(error) {
+
+      console.log(error)
+
+      if(error.response) {
+        alert(error.response.data.message);
+
+      }else {
+        alert("não foi possível atualizar o usuário.");
+      };
+    };
+  };
+
+
+  useEffect(() => { //Logic to login local-storage
 
     const user = localStorage.getItem("@rocketmovies:user");
     const token = localStorage.getItem("@rocketmovies:token");
@@ -57,7 +96,8 @@ function AuthProvider({ children }) {
     <AuthContext.Provider value={
       {
         user: data.user,
-        signIn
+        signIn,
+        updateProfile
       }
     }>
 

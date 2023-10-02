@@ -7,8 +7,50 @@ import { ButtonText } from '../../components/ButtonText';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
+import { useAuth } from '../../hooks/auth';
+import { useState } from 'react';
+import { api } from '../../services/api';
+
 
 export function Profile() {
+
+  const { user, updateProfile } = useAuth();
+
+  const [ name, setName ] = useState(user.name);
+  const [ email, setEmail ] = useState(user.email);
+
+  const [ password, setPassowrd ] = useState("");
+  const [ old_password, setOld_password ] = useState("");
+
+  const avatarURL = user.avatar ? `${ api.defaults.baseURL }/files/${ user.avatar }` : AvatarPlaceholder;
+  const [ avatar, setAvatar ] = useState(avatarURL);
+  const [ avatarFile, setAvatarFile ] = useState(null);
+
+
+  async function HandleUpdate() {
+    
+    const userUpdated = {
+      name,
+      email,
+      old_password,
+      password,
+      avatar: user.avatar
+    };
+
+    await updateProfile(userUpdated, avatarFile);
+
+    setOld_password("");
+    setPassowrd("");
+  };
+
+  function HandleChangeAvatar(event) {
+    const file = event.target.files[0];
+    setAvatarFile(file);
+
+    const imagePreview = URL.createObjectURL(file);
+    setAvatar(imagePreview);
+  };
+
 
   return(
     <Container>
@@ -27,13 +69,14 @@ export function Profile() {
         <Form>
 
           <Avatar>
-            <img src={AvatarPlaceholder} alt="" />
+            <img src={avatar} alt="Imagem de usuário." />
 
             <label htmlFor="fileAvatar">
               
               <input 
                 id="fileAvatar"
-                type="file" 
+                type="file"
+                onChange={HandleChangeAvatar}
               />
               <FiCamera />
               
@@ -45,41 +88,46 @@ export function Profile() {
             <Input
               type="text"
               icon={FiUser}
-              readOnly
-              value={`Lucas Gonçalves`}
+              value={name}
               placeholder="Nome"
               autoComplete="username"
+              onChange={e => setName(e.target.value)}
             />
 
             <Input
               type="email"
               icon={FiMail}
-              readOnly
-              value={`lucas@gmail.com`}
+              value={email}
               placeholder="E-mail"
               autoComplete="email"
+              onChange={e => setEmail(e.target.value)}
             />
 
 
             <Input
               type="password"
               icon={FiLock}
+              value={old_password}
               className="InputOldPassword"
               placeholder="Senha atual"
               autoComplete="current-password"
+              onChange={e => setOld_password(e.target.value)}
             />
 
             <Input
               type="password"
               icon={FiLock}
+              value={password}
               placeholder="Nova senha"
               autoComplete="new-password"
+              onChange={e => setPassowrd(e.target.value)}
             />
 
           </Informations>
 
           <Button 
             title="Salvar"
+            onClick={HandleUpdate}
           />
 
         </Form>
