@@ -5,9 +5,48 @@ import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { ButtonText } from '../../components/ButtonText';
 
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { api } from '../../services/api';
+
 
 export function SignUp() {
+  const navigate = useNavigate();
 
+  const [ name, setName ] = useState("");
+  const [ email, setEmail ] = useState("");
+  const [ password, setPassword ] = useState("");
+
+
+  async function HandleSignUp() {
+
+    try{
+      const response = await api.post("/users", { name, email, password });
+
+      setName("");
+      setEmail("");
+      setPassword("");
+
+      alert(response.data.message);
+      HandleGoSignIn();
+
+    }catch(error) {
+
+      if(error.response) {
+        alert(error.response.data.message);
+
+      }else {
+        alert("Não foi possivel realizar a criação de um usuário.");
+      };
+    };
+  };
+  
+  
+  function HandleGoSignIn() {
+    navigate(-1);
+  };
+
+  
   return(
 
     <Container>
@@ -26,6 +65,7 @@ export function SignUp() {
             type="text"
             placeholder="Nome"
             autoComplete="username"
+            onChange={e => setName(e.target.value)}
           />
           
           <Input
@@ -33,18 +73,21 @@ export function SignUp() {
             type="email"
             placeholder="E-mail"
             autoComplete="email"
+            onChange={e => setEmail(e.target.value)}
           />
 
           <Input
             icon={FiLock}
-            type="passoword"
+            type="password"
             placeholder="Senha"
             autoComplete="current-password"
+            onChange={e => setPassword(e.target.value)}
           />
 
 
           <Button 
             title="Cadastrar"
+            onClick={HandleSignUp}
           />
 
         </Form>
@@ -53,6 +96,7 @@ export function SignUp() {
           <ButtonText 
             title="Voltar para o login"
             data-arrow="true"
+            onClick={HandleGoSignIn}
           />
         </div>
 

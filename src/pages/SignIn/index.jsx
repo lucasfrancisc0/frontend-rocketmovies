@@ -26,7 +26,7 @@ export function SignIn() {
   };
 
 
-  function HandleSignUp() {
+  function HandleGOSignUp() {
     navigate("/register");
   };
 
@@ -72,7 +72,7 @@ export function SignIn() {
         <div className="ButtonCreate">
           <ButtonText 
             title="Criar conta"
-            onClick={HandleSignUp}
+            onClick={HandleGOSignUp}
           />
         </div>
         
