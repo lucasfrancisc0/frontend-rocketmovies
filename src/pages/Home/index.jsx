@@ -1,17 +1,46 @@
 import { Container, Content, Button, Add, Movies } from './styles';
 import { FiPlus } from 'react-icons/fi';
+import { TbMovieOff } from 'react-icons/tb';
 
 import { Header } from '../../components/Header';
 import { Movie } from '../../components/Movie'
 
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';  
+import { api } from '../../services/api';
+
 
 export function Home() {
+  const navigate = useNavigate()
+
+  const [movies, setMovies] = useState([]);
+  const [title, setTitle] = useState("");
+
+
+  function HandleGOnewMovie() {
+    navigate("/New");
+  };
+
+
+  useEffect(() => { // seacrh movies
+
+    async function fetchMovies() {
+
+      const response = await api.get(`/movies?movie_id&title=${title}`);
+      setMovies(response.data.movies);
+
+    }; fetchMovies();
+
+  }, [title]);
 
   return(
 
     <Container>
 
-      <Header />
+      <Header 
+        value={title}
+        onChange={e => setTitle(e.target.value)}
+      />
 
       <main>
         <Content>
@@ -19,40 +48,47 @@ export function Home() {
           <Add>
             <h1>Meus filmes</h1>
 
-
-            <Button>
+            <Button onClick={HandleGOnewMovie}>
               <FiPlus />
 
-              <button 
-                type="button"
-              >
+              <button type="button">
                 Adicionar filme
               </button>
+
             </Button>
           </Add>
 
 
           <Movies>
-            <Movie 
-              title="Título"
-              data-rating={4}
-              data-description={`Pragas nas colheitas fizeram a civilização humana regredir para uma sociedade agrária em futuro de data desconhecida. Cooper, ex-piloto da NASA, tem uma fazenda com sua família. Murphy, a filha de dez anos de Cooper, acredita que seu quarto está assombrado por um fantasma que tenta se comunicar com ela. Pai e filha descobrem que o "fantasma" é`}
-              data-tags={["Fccção", "Drama", "Família"]}
-            />
 
-            <Movie 
-              title="Título"
-              data-rating={4}
-              data-description={`Pragas nas colheitas fizeram a civilização humana regredir para uma sociedade agrária em futuro de data desconhecida. Cooper, ex-piloto da NASA, tem uma fazenda com sua família. Murphy, a filha de dez anos de Cooper, acredita que seu quarto está assombrado por um fantasma que tenta se comunicar com ela. Pai e filha descobrem que o "fantasma" é`}
-              data-tags={["Fccção", "Drama", "Família"]}
-            />
+            {
+              movies.length > 0 
+              ? 
+              movies.map((movie, index) => {
+                return(
+                  <li
+                    key={`movie_${index}`}
+                    className="movie" 
+                  >
+                    <Movie 
+                      data-id={movie.id}
+                      title={movie.title}
+                      data-tags={movie.tags}
+                      data-rating={movie.rating}
+                      data-description={movie.description}
+                    />
+                  </li>
+                );
+              }) 
+              
+              : 
+              
+              <div id='NotFind'>
+                <TbMovieOff />
+                <p>Nenhum filme econtrado.</p>
+              </div>
+            }
 
-            <Movie 
-              title="Título"
-              data-rating={4}
-              data-description={`Pragas nas colheitas fizeram a civilização humana regredir para uma sociedade agrária em futuro de data desconhecida. Cooper, ex-piloto da NASA, tem uma fazenda com sua família. Murphy, a filha de dez anos de Cooper, acredita que seu quarto está assombrado por um fantasma que tenta se comunicar com ela. Pai e filha descobrem que o "fantasma" é`}
-              data-tags={["Fccção", "Drama", "Família"]}
-            />
           </Movies>
           
           

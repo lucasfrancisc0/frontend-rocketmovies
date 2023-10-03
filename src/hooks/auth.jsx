@@ -35,6 +35,15 @@ function AuthProvider({ children }) {
   };
 
 
+  async function signOut() {
+
+    localStorage.removeItem("@rocketmovies:user");
+    localStorage.removeItem("@rocketmovies:token");
+    
+    setData({});
+  };
+
+
   async function updateProfile(user, avatarFile) {
 
     try {
@@ -97,6 +106,7 @@ function AuthProvider({ children }) {
       {
         user: data.user,
         signIn,
+        signOut,
         updateProfile
       }
     }>

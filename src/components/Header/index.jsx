@@ -5,15 +5,25 @@ import avatarPlaceholder from '../../assets/avatar_placeholder.svg';
 
 import { Input } from '../Input';
 
-import { useState } from 'react';
 import { useAuth } from '../../hooks/auth';
 import { api } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 
-export function Header() {
-  const { user } = useAuth()
+export function Header({ value, onChange, ...rest }) {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${ user.avatar }` : avatarPlaceholder;
+
+  function HandleSignOut() {
+    signOut();
+    navigate("/");
+  };
+
+  function HandleProfile() {
+    navigate("/Profile");
+  };
 
 
   return (
@@ -29,9 +39,12 @@ export function Header() {
       <Input
         icon={FiSearch} 
         type='text'
+        value={value}
         autoComplete='text'
         placeholder="Pesquisar pelo título"
         className="InputSearch"
+        onChange={onChange}
+        {...rest}
       />
 
 
@@ -39,10 +52,18 @@ export function Header() {
 
         <div>
           <h3>Lucas Gonçalves</h3>
-          <span>Sair</span>
+          
+          <span 
+            onClick={HandleSignOut}
+          >
+            Sair
+          </span>
         </div>
 
-        <img src={avatarURL} alt="" />
+        <img 
+          src={avatarURL} alt="imagem de usuário."
+          onClick={HandleProfile}
+        />
 
       </Avatar>
 

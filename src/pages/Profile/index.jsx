@@ -10,11 +10,13 @@ import { Button } from '../../components/Button';
 import { useAuth } from '../../hooks/auth';
 import { useState } from 'react';
 import { api } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 
 export function Profile() {
 
   const { user, updateProfile } = useAuth();
+  const navigate = useNavigate();
 
   const [ name, setName ] = useState(user.name);
   const [ email, setEmail ] = useState(user.email);
@@ -51,7 +53,11 @@ export function Profile() {
     setAvatar(imagePreview);
   };
 
+  function handleBack() {
+    navigate(-1);
+  };
 
+  
   return(
     <Container>
 
@@ -60,6 +66,7 @@ export function Profile() {
         <ButtonText 
           data-arrow
           title="Voltar"
+          onClick={handleBack}
         />
 
       </header>

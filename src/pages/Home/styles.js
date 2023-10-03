@@ -119,14 +119,45 @@ export const Button = styled.div`
 `;
 
 
-export const Movies = styled.section`
+export const Movies = styled.ul`
+  min-height: 50rem;
+
   display: flex;
   flex-direction: column;
 
+  list-style: none;
   gap: 2.4rem;
 
-  > div:hover {
-    transition: .7s;
-    filter: brightness(0.8);
-  }
+
+  .movie {
+    transition: .6s;
+  };
+
+  .movie:hover {
+    transition: .6s;
+    filter: brightness(0.87);
+  };
+
+
+  #NotFind {
+    display: flex;
+    align-items: center;
+
+    gap: 1rem;
+
+    margin: auto;
+
+    svg {
+      width: 6rem;
+      height: 6rem;
+
+      color: ${({ theme }) => theme.COLORS.GRAY_300};
+    };
+
+
+    p {
+      font-size: 3.6rem;
+      color: ${({ theme }) => theme.COLORS.GRAY_200};
+    };
+  };
 `;  
