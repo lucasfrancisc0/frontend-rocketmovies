@@ -21,14 +21,31 @@ export const Container = styled.div`
     grid-area: content;
     overflow-y: auto;
 
+
     main {
       max-width: 111.3rem;
+      min-height: 65rem;
       
       padding: 4rem 2rem ;
       margin: auto;
 
       p {
         text-align: justify;
+      };
+    };
+
+    .ButtonDelete {
+      width: 100%;
+      padding: 0 2rem;
+      
+      display: flex;
+      justify-content: center;
+
+      > button {
+        background-color: ${({ theme }) => theme.COLORS.BLACK};
+        color: ${({ theme }) => theme.COLORS.PINK_ISHRED};
+        
+        max-width: 111.3rem;
       };
     };
   };
@@ -64,6 +81,8 @@ export const Creation = styled.div`
   margin-bottom: 4rem;
 
   > img {
+    border-radius: 50%;
+
     width: 2rem;
     height: 2rem;
   };
@@ -77,9 +96,11 @@ export const Creation = styled.div`
 `;
 
 
-export const BookMarks = styled.div`
+export const BookMarks = styled.ul`
   display: flex;
   gap: .8rem;
+
+  list-style: none;
 
   margin-bottom: 4rem;
 `;

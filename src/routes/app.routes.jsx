@@ -28,7 +28,7 @@ export function AppRoutes() {
       />
 
       <Route 
-        path="/Details/:note_id" 
+        path="/Details/:movie_id" 
         element={ <Details/>} 
       />
 

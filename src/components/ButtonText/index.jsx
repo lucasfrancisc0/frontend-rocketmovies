@@ -9,14 +9,16 @@ export function ButtonText({ onClick, title, ...rest }) {
 
     <Container 
       data-arrow={arrow}
-      onClick={onClick}
     >
 
       {
-        arrow && <FiArrowLeft />
+        arrow && <FiArrowLeft onClick={onClick} />
       }
 
-      <button {...rest}>
+      <button 
+        onClick={onClick}
+        {...rest}
+      >
         {title}
       </button>
       

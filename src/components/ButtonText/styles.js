@@ -5,10 +5,10 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
 
-  cursor: pointer;
   gap: .8rem;
 
   > button { 
+    cursor: pointer;
     width: max-content;
 
     background: none;
@@ -18,6 +18,8 @@ export const Container = styled.div`
   };
 
   > svg {
+    cursor: pointer;
+    
     width: 1.6rem;
     height: 1.6rem;
 

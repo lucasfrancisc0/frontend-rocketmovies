@@ -162,7 +162,7 @@ export function New() {
 
               <Buttons>
                 <Button 
-                  title="Excluir filme"
+                  title="Excluir informações"
                   className = "ButtonDelete"
                   onClick={HandleRemoveMovie}
                 />
