@@ -9,32 +9,72 @@ import { MovieItem } from '../../components/MovieItem';
 import { Button } from '../../components/Button';
 
 import { useState } from 'react';
+import { api } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 
 export function New() {
+  const navigate = useNavigate();
 
+  const [ title, setTitle ] = useState("");
+  const [ description, setDescription ] = useState("");
   const [ rating, setRating ] = useState(Number(0));
   
   const [ tags, setTags ] = useState([]);
-  const [ newTag, setNewTag ] = useState("")
+  const [ newTag, setNewTag ] = useState("");
 
 
   function HandleAddTag() {
 
     if(tags.includes(newTag) || newTag === "") {
-      setNewTag("")
-      return 
-    }
+      setNewTag("");
+      return ;
+    };
 
     
     setTags(prevState => [...prevState, newTag]);
-    setNewTag("")
+    setNewTag("");
   };
-  
 
   function HandleRemoveTag(tagDELETED) {
-
     setTags(prevState => prevState.filter(tag => tag !== tagDELETED));
+  };
+
+  async function HandleCreateMovie() {
+
+    if(newTag) {
+      return alert("Confirme o marcador para continar.");
+    };
+
+    try {
+      const response = await api.post("/movies", { title, description, rating, tags });
+      alert(response.data.message);
+
+    }catch(error) {
+
+      if(error.response) {
+        alert(error.response.data.message);
+      
+      }else{
+        alert("Não foi possível adicionar um novo filme.");
+      };
+    };
+
+    setTitle("");
+    setDescription("");
+    setRating("");
+    setTags([]);
+  };
+
+  async function HandleRemoveMovie() {
+    setTitle("");
+    setDescription("");
+    setRating("");
+    setTags([]);
+  };
+
+  function HandleBack() {
+    navigate(-1);
   };
 
 
@@ -45,8 +85,6 @@ export function New() {
       <Header/>
 
       <Content className='Content'>
-        
-
 
         <main>
 
@@ -54,6 +92,7 @@ export function New() {
               data-arrow
               title="Voltar"
               className='BackHome'
+              onClick={HandleBack}
             />
 
           <Form>
@@ -63,8 +102,10 @@ export function New() {
 
               <Input 
                 type='text'
-                placeholder="Título"
+                value={title}
                 autoComplete='text'
+                placeholder="Título"
+                onChange={ e => setTitle(e.target.value) }
               />
 
               <Rating>
@@ -86,7 +127,9 @@ export function New() {
             </div>
 
             <TextArea 
+              value={description}
               placeholder="Observações"
+              onChange={ e => setDescription(e.target.value) }
             />
 
             <section>
@@ -111,20 +154,22 @@ export function New() {
                 <MovieItem
                   data-isnew
                   value={newTag}
-                  onChange={e => setNewTag(e.target.value)}
                   onClick={HandleAddTag}
+                  onChange={e => setNewTag(e.target.value)}
                 />
 
               </BookMarks>
 
               <Buttons>
                 <Button 
-                  className = "ButtonDelete"
                   title="Excluir filme"
+                  className = "ButtonDelete"
+                  onClick={HandleRemoveMovie}
                 />
 
                 <Button 
                   title="Salvar informações"
+                  onClick={HandleCreateMovie}
                 />
               </Buttons>
               
