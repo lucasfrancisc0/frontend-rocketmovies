@@ -51,7 +51,7 @@ export function Header({ value, onChange, ...rest }) {
       <Avatar>
 
         <div>
-          <h3>Lucas Gonçalves</h3>
+          <h3>{user.name}</h3>
           
           <span 
             onClick={HandleSignOut}
